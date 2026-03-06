@@ -1,0 +1,66 @@
+logger:
+  file:
+    path: /var/log/open5gs/upf.log
+
+global:
+  max:
+    ue: 1024
+
+upf:
+  pfcp:
+    server:
+      - address: 10.38.1.13 #127.0.0.7
+    client:
+#      smf:
+ #       - address: #127.0.0.4   # SMF loopback
+
+  gtpu:
+    server:
+      - address: 10.38.1.13 #127.0.0.7
+
+  session:
+    - subnet: 10.46.0.0/16
+      gateway: 10.46.0.1
+      dnn: mec.klu
+
+  metrics:
+    server:
+      - address: 127.0.0.7
+        port: 9090
+
+################################################################################
+# PFCP Server
+################################################################################
+# o Override PFCP addrespf#    server:
+#      - dev: eth0
+#        advertise: open5gs-upf.svc.local
+#
+######################
+################################################################################
+#  o Override SGW-U GTP-U address to be advertised inside S1AP messages 
+#  gtpu:
+#    server:
+#      - dev: ens3
+#        advertise: upf1.5gc.mnc001.mcc001.3gppnetwork.org
+#
+#  o User Plane IP Resoure information
+#  gtpu:
+#    server:
+#      - address:
+#        - 127.0.0.7
+#        - ::1
+#        teid_range_indication: 4
+#        teid_range: 10
+#        network_instance: internet
+#        source_interface: 0
+#      - address: 127.0.10
+#        network_instance: ims
+#        source_interface: 1
+#
+################################################################################
+# 3GPP Specification
+################################################################################
+#
+#  o Specific DNN/APN(e.g 'ims') uses 10.46.0.1/16, 2001:db8:babe::1/48
+#  $ sudo ip addr add 10.45.0.1/16 dev ogstun
+#  $ sudo ip addr add 2001:db8:cafe::
